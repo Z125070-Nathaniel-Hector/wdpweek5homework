@@ -62,8 +62,16 @@
      
       //INPUT YOUR CODE HERE
       //HINT: Use fetch() to get quote from "quotes.json"
+      fetch("quotes.json")
+      .then(response => response.json())
+      .then(quotes => {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const selectedQuote = quotes[randomIndex];
 
-
+        document.getElementById("quoteText").textContent = selectedQuote.q;
+        document.getElementById("authorText").textContent = `- ${selectedQuote.a}`;
+      })
+      .catch(error => console.error("Error fetching quotes:", error));
     }
     newQuoteBtn.addEventListener("click", getQuote);
     getQuote(); // Load a quote on page load
